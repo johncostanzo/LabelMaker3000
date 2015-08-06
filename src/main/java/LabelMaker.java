@@ -114,7 +114,7 @@ public class LabelMaker {
                             
                             String s4 = Integer.toString(position);
                             
-                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4 + "poop");
+                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4");
                             
                             // not working
                             if (aisle2) {
