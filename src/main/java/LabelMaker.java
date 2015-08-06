@@ -243,7 +243,7 @@ public class LabelMaker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        JOptionPane.showMessageDialog(null, "labels.txt was successfully created on your desktop", "Success!",
+        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your desktop", "Success!",
                 JOptionPane.PLAIN_MESSAGE);
         System.exit(0);
 	}
