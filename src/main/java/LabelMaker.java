@@ -21,7 +21,6 @@ public class LabelMaker {
 			String levelStart, String levelEnd, String positionStart, String positionEnd, 
 			boolean aisle2, boolean aisle4, boolean section2, boolean section4, boolean totemPole) 
 	{
-		
 		setAisleStart(aisleStart);
 		setAisleEnd(aisleEnd);
 		setSectionStart(sectionStart);
@@ -38,57 +37,131 @@ public class LabelMaker {
 	}
 	
 	//mutators
-	// TODO input val
   	public void setAisleStart(String aisleStart) {
-  		this.aisleStart = Integer.parseInt(aisleStart);
+  		try {
+  	  		this.aisleStart = Integer.parseInt(aisleStart);
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  			
+  		}
   	}
   	
   	public void setAisleEnd(String aisleEnd) {
-  		this.aisleEnd = Integer.parseInt(aisleEnd);
+  		try {
+  			this.aisleEnd = Integer.parseInt(aisleEnd);
+  			if (this.aisleStart > this.aisleEnd) {
+  				inputErrorMSG();
+  			}
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setSectionStart(String sectionStart) {
-  		this.sectionStart = Integer.parseInt(sectionStart);
+  		try {
+  			this.sectionStart = Integer.parseInt(sectionStart);
+		} catch (Exception x) {
+			inputErrorMSG();
+  		}
   	}
     
   	public void setSectionEnd(String sectionEnd) {
-  		this.sectionEnd = Integer.parseInt(sectionEnd);
+  		try {
+  			this.sectionEnd = Integer.parseInt(sectionEnd);
+		} catch (Exception x) {
+			inputErrorMSG();
+  		}
   	}
   	
   	public void setLevelStart(String levelStart) {
-  		this.levelStart = levelStart.charAt(0);
+  		try {
+  			this.levelStart = levelStart.charAt(0);
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setLevelEnd(String levelEnd) {
-  		this.levelEnd = levelEnd.charAt(0);
+  		try {
+  			this.levelEnd = levelEnd.charAt(0);
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setPositionStart(String positionStart) {
-  		this.positionStart = Integer.parseInt(positionStart);
+  		try {
+  			this.positionStart = Integer.parseInt(positionStart);
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setPositionEnd(String positionEnd) {
-  		this.positionEnd = Integer.parseInt(positionEnd);
+  		try {
+  			this.positionEnd = Integer.parseInt(positionEnd);
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setAisle2(boolean aisle2) {
-  		this.aisle2 = aisle2;
+  		try {
+  			this.aisle2 = aisle2;
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setAisle4(boolean aisle4) {
-  		this.aisle4 = aisle4;
+  		try {
+  			this.aisle4 = aisle4;
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  			
+  		}
   	}
   	
   	public void setSection2(boolean section2) {
-  		this.section2 = section2;
+  		try {
+  			this.section2 = section2;
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
 	
   	public void setSection4(boolean section4) {
-  		this.section4 = section4;
+  		try {
+  			this.section4 = section4;
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
   	}
   	
   	public void setTotemPole(boolean totemPole) {
-  		this.totemPole = totemPole;
+  		try {
+  			this.totemPole = totemPole;
+  		} catch (Exception x) {
+  			inputErrorMSG();
+  		}
+  	}
+  	
+  	public void inputErrorMSG() {
+  		
+  		String desktop = System.getProperty("user.home") + "\\Desktop";
+        File file = new File(desktop, "LabelMakerERROR.txt");
+        
+        try (
+        		PrintWriter output = new PrintWriter(file);
+        		) {
+        	output.println("Please enter data fields in the following format:");
+        	output.println("-Aisles are positive integers no greater than 100");
+        	output.println("-Sections are positive integers no greater than 100");
+        	output.println("-Levels are single alphabetical characters");
+        	output.println("-Positions are positive integers no greater than 10");
+        	output.println("-Start values are ALWAYS less than end values");
+        	output.println("\nPlease enter revised data and try again!");
+        }
   	}
   	
 	public void main() {
@@ -96,14 +169,14 @@ public class LabelMaker {
 		String desktop = System.getProperty("user.home") + "\\Desktop";
         File file = new File(desktop, "labels.txt");
         
-        try (PrintWriter output = new PrintWriter(file);) {
-        	
+        try
+        (PrintWriter output = new PrintWriter(file);
+        		) {
         	for (int aisle = aisleStart; aisle < aisleEnd + 1; aisle++) {
         		for (int section = sectionStart; section < sectionEnd + 1; section++) {
         			for (int level = levelStart; level < levelEnd + 1; level++) {
         				for (int position = positionStart; position < positionEnd + 1; position++) 
         				{
-        					
         					String s1 = Integer.toString(aisle / 10) 
         							+ Integer.toString(aisle % 10);
         					
@@ -119,9 +192,8 @@ public class LabelMaker {
                             if (totemPole) {
                             	output.print("\t");
                             } else {
-                            	output.print("\t");
+                            	output.print("\n");
                             }
-                            
         				}
         			}
         			
@@ -131,21 +203,17 @@ public class LabelMaker {
                     	section +=3;
                     }
                     
-            		output.println();
-        			
+                    if (totemPole) {
+                    	output.println();
+                    }
         		}
-        		
-
         		
                 if (aisle2) {
                 	aisle++;
                 } else if (aisle4) {
                 	aisle += 3;
                 }
-        		
         	}
-        } catch(Exception ex) {
-        	//TODO
-        	}
+		}
 	}
 }
