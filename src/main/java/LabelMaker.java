@@ -114,20 +114,7 @@ public class LabelMaker {
                             
                             String s4 = Integer.toString(position);
                             
-                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4");
-                            
-                            // not working
-                            if (aisle2) {
-                            	aisle++;
-                            } else if (aisle4) {
-                            	aisle += 3;
-                            }
-                            
-                            if (section2) {
-                            	section++;
-                            } else if (section4) {
-                            	section +=3;
-                            }
+                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4);
                             
                             if (totemPole) {
                             	output.print("\t");
@@ -137,7 +124,25 @@ public class LabelMaker {
                             
         				}
         			}
+        			
+                    if (section2) {
+                    	section++;
+                    } else if (section4) {
+                    	section +=3;
+                    }
+                    
+            		output.println();
+        			
         		}
+        		
+
+        		
+                if (aisle2) {
+                	aisle++;
+                } else if (aisle4) {
+                	aisle += 3;
+                }
+        		
         	}
         } catch(Exception ex) {
         	//TODO
