@@ -269,7 +269,7 @@ public class LabelMakerGUI extends javax.swing.JFrame {
         pack();
     }
 	
-    /*
+    /**
      * TODO
      */
     private void createFileButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,8 +292,7 @@ public class LabelMakerGUI extends javax.swing.JFrame {
     			levelStart, levelEnd, positionStart, positionEnd, aisle2, aisle4, section2, 
     			section4, totemPole);
     	
-    	lblmkr.main();
-    	System.exit(0);
+    	
     }
 
     private void aisleStartTFActionPerformed(java.awt.event.ActionEvent evt) {}

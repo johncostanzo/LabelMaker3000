@@ -1,5 +1,9 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.Queue;
+import javax.swing.JOptionPane;
 
 public class LabelMaker {
 	
@@ -16,6 +20,7 @@ public class LabelMaker {
 	private boolean section2;
 	private boolean section4;
 	private boolean totemPole;
+	private Queue<Exception> errors = new LinkedList<Exception>();
 	
 	public LabelMaker(String aisleStart, String aisleEnd, String sectionStart, String sectionEnd, 
 			String levelStart, String levelEnd, String positionStart, String positionEnd, 
@@ -34,6 +39,12 @@ public class LabelMaker {
 		setSection2(section2);
 		setSection4(section4);
 		setTotemPole(totemPole);
+		
+		if (!errors.isEmpty()) {
+			errorMsg();
+		} else {
+			main();
+		}
 	}
 	
 	//mutators
@@ -41,19 +52,20 @@ public class LabelMaker {
   		try {
   	  		this.aisleStart = Integer.parseInt(aisleStart);
   		} catch (Exception x) {
-  			inputErrorMSG();
-  			
+  			errors.add(x);
   		}
   	}
   	
   	public void setAisleEnd(String aisleEnd) {
   		try {
   			this.aisleEnd = Integer.parseInt(aisleEnd);
-  			if (this.aisleStart > this.aisleEnd) {
-  				inputErrorMSG();
+  			
+  			if (aisleStart > this.aisleEnd) {
+  				Exception x = new Exception();
+  				errors.add(x);
   			}
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
@@ -61,15 +73,20 @@ public class LabelMaker {
   		try {
   			this.sectionStart = Integer.parseInt(sectionStart);
 		} catch (Exception x) {
-			inputErrorMSG();
+			errors.add(x);
   		}
   	}
     
   	public void setSectionEnd(String sectionEnd) {
   		try {
   			this.sectionEnd = Integer.parseInt(sectionEnd);
+  			
+  			if (sectionStart > this.sectionEnd) {
+  				Exception x = new Exception();
+  				errors.add(x);
+  			}
 		} catch (Exception x) {
-			inputErrorMSG();
+			errors.add(x);
   		}
   	}
   	
@@ -77,15 +94,20 @@ public class LabelMaker {
   		try {
   			this.levelStart = levelStart.charAt(0);
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
   	public void setLevelEnd(String levelEnd) {
   		try {
   			this.levelEnd = levelEnd.charAt(0);
+  			
+  			if (levelStart > this.levelEnd) {
+  				Exception x = new Exception();
+  				errors.add(x);
+  			}
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
@@ -93,15 +115,20 @@ public class LabelMaker {
   		try {
   			this.positionStart = Integer.parseInt(positionStart);
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
   	public void setPositionEnd(String positionEnd) {
   		try {
   			this.positionEnd = Integer.parseInt(positionEnd);
+  			
+  			if (positionStart > this.positionEnd) {
+  				Exception x = new Exception();
+  				errors.add(x);
+  			}
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
@@ -109,7 +136,7 @@ public class LabelMaker {
   		try {
   			this.aisle2 = aisle2;
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
@@ -117,7 +144,7 @@ public class LabelMaker {
   		try {
   			this.aisle4 = aisle4;
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   			
   		}
   	}
@@ -126,7 +153,7 @@ public class LabelMaker {
   		try {
   			this.section2 = section2;
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
 	
@@ -134,7 +161,7 @@ public class LabelMaker {
   		try {
   			this.section4 = section4;
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
@@ -142,26 +169,24 @@ public class LabelMaker {
   		try {
   			this.totemPole = totemPole;
   		} catch (Exception x) {
-  			inputErrorMSG();
+  			errors.add(x);
   		}
   	}
   	
-  	public void inputErrorMSG() {
+  	public void errorMsg() {
+
+        	String s1 = "Enter data fields in the following format:\n\n";
+        	String s2 = "-Aisles are positive integers no greater than 100\n";
+        	String s3 = "-Sections are positive integers no greater than 100\n";
+        	String s4 = "-Levels are single alphabetical characters\n";
+        	String s5 = "-Positions are positive integers no greater than 10\n";
+        	String s6 = "-Start values are ALWAYS less than end values\n";
+        	String s7 = "\nPlease enter revised data and try again!\n";
   		
-  		String desktop = System.getProperty("user.home") + "\\Desktop";
-        File file = new File(desktop, "LabelMakerERROR.txt");
-        
-        try (
-        		PrintWriter output = new PrintWriter(file);
-        		) {
-        	output.println("Please enter data fields in the following format:");
-        	output.println("-Aisles are positive integers no greater than 100");
-        	output.println("-Sections are positive integers no greater than 100");
-        	output.println("-Levels are single alphabetical characters");
-        	output.println("-Positions are positive integers no greater than 10");
-        	output.println("-Start values are ALWAYS less than end values");
-        	output.println("\nPlease enter revised data and try again!");
-        }
+  		String msg = s1 + s2 + s3 + s4 + s5 + s6 + s7;
+
+  		JOptionPane.showMessageDialog(null, msg, "Error",
+                JOptionPane.ERROR_MESSAGE);
   	}
   	
 	public void main() {
@@ -214,6 +239,12 @@ public class LabelMaker {
                 	aisle += 3;
                 }
         	}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+        JOptionPane.showMessageDialog(null, "labels.txt was successfully created on your desktop", "Success!",
+                JOptionPane.PLAIN_MESSAGE);
+        System.exit(0);
 	}
 }
