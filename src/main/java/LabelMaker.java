@@ -30,6 +30,11 @@ public class LabelMaker {
 		setLevelEnd(levelEnd);
 		setPositionStart(positionStart);
 		setPositionEnd(positionEnd);
+		setAisle2(aisle2);
+		setAisle4(aisle4);
+		setSection2(section2);
+		setSection4(section4);
+		setTotemPole(totemPole);
 	}
 	
 	//mutators
@@ -98,14 +103,20 @@ public class LabelMaker {
         			for (int level = levelStart; level < levelEnd + 1; level++) {
         				for (int position = positionStart; position < positionEnd + 1; position++) 
         				{
-        					String s1 = Integer.toString(aisle / 10)
-                                    + Integer.toString(aisle % 10);
-                            String s2 = Integer.toString(section / 10)
-                                    + Integer.toString(section % 10);
-                            String s3 = "" + (char)level;
-                            String s4 = Integer.toString(position);
-                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4);
+        					
+        					String s1 = Integer.toString(aisle / 10) 
+        							+ Integer.toString(aisle % 10);
+        					
+                            String s2 = Integer.toString(section / 10) 
+                            		+ Integer.toString(section % 10);
                             
+                            String s3 = "" + (char)level;
+                            
+                            String s4 = Integer.toString(position);
+                            
+                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4 + "poop");
+                            
+                            // not working
                             if (aisle2) {
                             	aisle++;
                             } else if (aisle4) {
@@ -121,7 +132,7 @@ public class LabelMaker {
                             if (totemPole) {
                             	output.print("\t");
                             } else {
-                            	output.println();
+                            	output.print("\t");
                             }
                             
         				}
