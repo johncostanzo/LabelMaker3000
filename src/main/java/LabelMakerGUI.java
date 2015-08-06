@@ -1,6 +1,23 @@
+/**
+ * 
+ * Programmer: 		John Costanzo
+ * Date created:	062815
+ * 
+ *
+ * This class will create a GUI that 
+ */
+
 public class LabelMakerGUI extends javax.swing.JFrame {
 
-    public LabelMakerGUI() {
+	
+	/**
+	 * Suppresses warning:
+	 * "The serializable class LabelMakerGUI does not declare a static final serialVersionUID field
+	 *  of type long"
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public LabelMakerGUI() {
         initComponents();
     }
 
@@ -252,7 +269,7 @@ public class LabelMakerGUI extends javax.swing.JFrame {
         pack();
     }
 	
-    /*
+    /**
      * TODO
      */
     private void createFileButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,7 +292,7 @@ public class LabelMakerGUI extends javax.swing.JFrame {
     			levelStart, levelEnd, positionStart, positionEnd, aisle2, aisle4, section2, 
     			section4, totemPole);
     	
-    	lblmkr.main();
+    	
     }
 
     private void aisleStartTFActionPerformed(java.awt.event.ActionEvent evt) {}
