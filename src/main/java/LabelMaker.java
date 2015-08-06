@@ -102,7 +102,7 @@ public class LabelMaker {
   		try {
   			this.levelEnd = levelEnd.charAt(0);
   			
-  			if (levelStart > this.levelEnd || this.levelStart < 65 && this.levelEnd > 122) {
+  			if (levelStart > this.levelEnd || levelStart < 65 || this.levelEnd > 90) {
   				Exception x = new Exception();
   				errors.add(x);
   			}
@@ -178,9 +178,9 @@ public class LabelMaker {
         	String s1 = "Enter data fields in the following format:\n\n";
         	String s2 = "-Aisles are positive integers no greater than 30\n";
         	String s3 = "-Sections are positive integers no greater than 100\n";
-        	String s4 = "-Levels are a single alphabetical character\n";
+        	String s4 = "-Levels are a single uppercase character\n";
         	String s5 = "-Positions are positive integers no greater than 10\n";
-        	String s6 = "-Start values are ALWAYS less than end values\n";
+        	String s6 = "-Start values are always less than end values\n";
         	String s7 = "\nPlease enter revised data and try again!\n";
   		
   		String msg = s1 + s2 + s3 + s4 + s5 + s6 + s7;
