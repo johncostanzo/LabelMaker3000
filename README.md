@@ -1,5 +1,5 @@
 Programmer: John Costanzo
-Date:		8 June 2015
+Date:		  8 June 2015
 
 This program will prompt the user to enter a Start location and an End location (for our
 warehouse) and will then print all the locations in between in a file "labels.txt" on the user's
