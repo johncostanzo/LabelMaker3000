@@ -54,6 +54,7 @@ public class LabelMaker {
 		}
 	}
 	
+	/** For testing purposes. */
 	public LabelMaker(String aisleStart, String aisleEnd, String sectionStart, String sectionEnd, 
 			String levelStart, String levelEnd, String positionStart, String positionEnd, 
 			boolean aisle2, boolean aisle4, boolean section2, boolean section4, boolean totemPole, 
@@ -73,12 +74,12 @@ public class LabelMaker {
 		setSection4(section4);
 		setTotemPole(totemPole);
 		
-		// If there was invalid input
-		if (!errors.isEmpty()) {
-			errorMsg();
-		} else {
-			main(file);
-		}
+		main(file);
+	}
+	
+	/** Constructor for testing purposes. */
+	public LabelMaker() {
+		
 	}
 	
 	/** Mutator functions. Input validation where needed. If invalid input, added Exception to 
@@ -170,7 +171,7 @@ public class LabelMaker {
   	public void setPositionEnd(String positionEnd) {
   		try {
   			this.positionEnd = Integer.parseInt(positionEnd);
-  			if (positionStart > this.positionEnd) {
+  			if (positionStart > this.positionEnd || this.positionEnd > 10) {
   				Exception x = new Exception();
   				errors.add(x);
   			}
@@ -199,6 +200,63 @@ public class LabelMaker {
   			this.totemPole = totemPole;
   	}
   	
+  	/** Accessors for testing purposes. */
+  	public int getAisleStart() {
+  		return aisleStart;
+  	}
+  	
+  	public int getAisleEnd() {
+  		return aisleEnd;
+  	}
+  	
+  	public int getSectionStart() {
+  		return sectionStart;
+  	}
+  	
+  	public int getSectionEnd() {
+  		return sectionEnd;
+  	}
+  	
+  	public char getLevelStart() {
+  		return levelStart;
+  	}
+  	
+  	public char getLevelEnd() {
+  		return levelEnd;
+  	}
+  	
+  	public int getPositionStart() {
+  		return positionStart;
+  	}
+  	
+  	public int getPositionEnd() {
+  		return positionEnd;
+  	}
+  	
+  	public boolean getAisle2() {
+  		return aisle2;
+  	}
+  	
+  	public boolean getAisle4() {
+  		return aisle4;
+  	}
+  	
+  	public boolean getSection2() {
+  		return section2;
+  	}
+  	
+  	public boolean getSection4() {
+  		return section4;
+  	}
+  	
+  	public boolean getTotemPole() {
+  		return totemPole;
+  	}
+  	
+  	public Queue<Exception> getErrors() {
+  		return errors;
+  	}
+  	
   	/** Creates error message pop up with instructions. */
   	public void errorMsg() {
   		
@@ -216,7 +274,7 @@ public class LabelMaker {
                 JOptionPane.ERROR_MESSAGE);
   	}
   	
-  	/** Writes labels.txt file. Writes to desktop. */
+  	/** Writes labels.txt file to desktop. */
 	public void main() {
 		
 		String desktop = System.getProperty("user.home") + "\\Desktop";
@@ -285,7 +343,8 @@ public class LabelMaker {
         System.exit(0);
 	}
 	
-	/* For testing purposes. Changed file path and name. **/
+	/* For testing purposes. Identical function except location of output file and error/success 
+	 * message. **/
 	public void main(File file) {
         
         try
@@ -340,9 +399,6 @@ public class LabelMaker {
                 }
         	}
         	// Prints error message if FileNotFoundException. Not sure how to handle otherwise.
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, e.toString(), "Error",
-	                JOptionPane.ERROR_MESSAGE);
-		}
+		} catch (FileNotFoundException e) {}
 	}
 }
