@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 public class LabelMakerTest {
-
+	
 	@Test
 	/** Tests mutator function and input validation. */
 	public void testSetAisleStart() {
@@ -164,7 +164,7 @@ public class LabelMakerTest {
 			standardLabelsExpectedOutput.println("02-02-B-1");
 			standardLabelsExpectedOutput.println("02-02-B-2");
 		} catch(Exception x) {
-			// Just for unit testing.
+			System.out.println("File not created.");
 		}
 		
 		// String to concatenate expected standard labels.
@@ -178,7 +178,7 @@ public class LabelMakerTest {
 				standardLabelsExpectedString += standardLabelsExpectedInput.nextLine();
 			}
 		} catch(Exception x) {
-			// Just for unit testing.
+			System.out.println("File not created.");
 		}
 		
 		// Creates a file of expected labels with "Every 2 Aisles" radio button selected.
@@ -203,7 +203,7 @@ public class LabelMakerTest {
 			aisles2ExpectedOutput.println("03-02-B-1");
 			aisles2ExpectedOutput.println("03-02-B-2");
 		} catch(Exception x) {
-			// Just for unit testing.
+			System.out.println("File not created.");
 		}
 		
 		// String to concatenate expected "Every 2 Aisles" labels.
@@ -217,7 +217,7 @@ public class LabelMakerTest {
 				aisles2ExpectedString += aisles2ExpectedInput.nextLine();
 			}
 		} catch(Exception x) {
-			// Just for unit testing.
+			System.out.println("File not created.");
 		}
 		
 		// Creates a file of expected labels with "Every 4 Aisles" radio button selected.
@@ -242,7 +242,7 @@ public class LabelMakerTest {
 			aisles4ExpectedOutput.println("05-02-B-1");
 			aisles4ExpectedOutput.println("05-02-B-2");
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 				
 		// String to concatenate expected "Every 4 Aisles" labels.
@@ -256,7 +256,7 @@ public class LabelMakerTest {
 				aisles4ExpectedString += aisles4ExpectedInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		
 		// Creates a file of expected labels with "Every 2 Sections" radio button selected.
@@ -281,7 +281,7 @@ public class LabelMakerTest {
 			section2ExpectedOutput.println("02-03-B-1");
 			section2ExpectedOutput.println("02-03-B-2");
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 				
 		// String to concatenate expected "Every 2 Sections" labels.
@@ -295,7 +295,7 @@ public class LabelMakerTest {
 				section2ExpectedString += section2ExpectedInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 				
 		// Creates a file of expected labels with "Every 4 Sections" radio button selected.
@@ -320,7 +320,7 @@ public class LabelMakerTest {
 			section4ExpectedOutput.println("02-05-B-1");
 			section4ExpectedOutput.println("02-05-B-2");
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 				
 		// String to concatenate expected "Every 4 Sections" labels.
@@ -334,7 +334,7 @@ public class LabelMakerTest {
 				section4ExpectedString += section4ExpectedInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 				
 		// Creates a file of expected labels with "Totem Poles" radio button selected.
@@ -362,7 +362,7 @@ public class LabelMakerTest {
 			totemPolesExpectedOutput.print("02-02-B-1\t");
 			totemPolesExpectedOutput.print("02-02-B-2\t");
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		// String to concatenate expected "Totem Poles" labels.
 		String totemPolesExpectedString = null;
@@ -375,7 +375,7 @@ public class LabelMakerTest {
 				totemPolesExpectedString += totemPolesExpectedInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		// act
 		
@@ -393,7 +393,7 @@ public class LabelMakerTest {
 				standardLabelsActualString += standardLabelsActualInput.nextLine();
 			}
 		} catch(Exception x) {
-			// Just for unit testing.
+			System.out.println("File not created.");
 		}
 		
 		// "Every 2 Aisles" actual file.
@@ -410,7 +410,7 @@ public class LabelMakerTest {
 				aisles2ActualString += aisles2ActualInput.nextLine();
 			}
 		} catch(Exception x) {
-			// Just for unit testing.
+			System.out.println("File not created.");
 		}
 		
 		// "Every 4 Aisles" actual file.
@@ -427,7 +427,7 @@ public class LabelMakerTest {
 				aisles4ActualString += aisles4ActualInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		
 		// "Every 2 Sections" actual file.
@@ -443,7 +443,7 @@ public class LabelMakerTest {
 				section2ActualString += section2ActualInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		
 		// "Every 4 Sections" actual file.
@@ -460,7 +460,7 @@ public class LabelMakerTest {
 				section4ActualString += section4ActualInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		
 		// "Totem Poles" actual file.
@@ -477,7 +477,7 @@ public class LabelMakerTest {
 				totemPolesActualString += totemPolesActualInput.nextLine();
 				}
 			} catch(Exception x) {
-				// Just for unit testing.
+				System.out.println("File not created.");
 				}
 		
 		// assert
