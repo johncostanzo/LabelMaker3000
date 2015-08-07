@@ -344,10 +344,5 @@ public class LabelMaker {
 			JOptionPane.showMessageDialog(null, e.toString(), "Error",
 	                JOptionPane.ERROR_MESSAGE);
 		}
-        // Prints Success! message and exits if file was written successfully.
-        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your"
-        		+ " desktop", "Success!",
-                JOptionPane.PLAIN_MESSAGE);
-        System.exit(0);
 	}
 }
