@@ -1,5 +1,6 @@
-Programmer: John Costanzo
-Date:		  8 June 2015
+###LabelMaker3000
+######Programmer: John Costanzo
+######Date:       8 June 2015
 
 This program will prompt the user to enter a Start location and an End location (for our
 warehouse) and will then print all the locations in between in a file "labels.txt" on the user's
@@ -10,10 +11,3 @@ print the labels horizontally rather than vertically, breaking at a change of se
 file should be imported into an Excel spreadsheet, then BarTender can print the labels 
 individually, or the Totem Pole spreadsheet can be sent to our "Totem Pole provider" (?) to make
 Totem Poles for us.
-
-ISSUES:
--Has not been tested on a Mac or Linux machine.
--Input validation could be handled better, specifying exact error and which text box.
--Doesn't really check if file is written to Desktop when Success! message is printed.
--testMain() is HUGE.
--Test files (...Expected.txt, ...Actual.txt) should be in /src/test/resources.
