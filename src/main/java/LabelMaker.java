@@ -54,6 +54,34 @@ public class LabelMaker {
 		}
 	}
 	
+	/** For testing purposes. */
+	public LabelMaker(String aisleStart, String aisleEnd, String sectionStart, String sectionEnd, 
+			String levelStart, String levelEnd, String positionStart, String positionEnd, 
+			boolean aisle2, boolean aisle4, boolean section2, boolean section4, boolean totemPole, 
+			File file) 
+	{
+		setAisleStart(aisleStart);
+		setAisleEnd(aisleEnd);
+		setSectionStart(sectionStart);
+		setSectionEnd(sectionEnd);
+		setLevelStart(levelStart);
+		setLevelEnd(levelEnd);
+		setPositionStart(positionStart);
+		setPositionEnd(positionEnd);
+		setAisle2(aisle2);
+		setAisle4(aisle4);
+		setSection2(section2);
+		setSection4(section4);
+		setTotemPole(totemPole);
+		
+		main(file);
+	}
+	
+	/** Constructor for testing purposes. */
+	public LabelMaker() {
+		
+	}
+	
 	/** Mutator functions. Input validation where needed. If invalid input, added Exception to 
 	 * errors queue. */
   	public void setAisleStart(String aisleStart) {
@@ -143,7 +171,7 @@ public class LabelMaker {
   	public void setPositionEnd(String positionEnd) {
   		try {
   			this.positionEnd = Integer.parseInt(positionEnd);
-  			if (positionStart > this.positionEnd) {
+  			if (positionStart > this.positionEnd || this.positionEnd > 10) {
   				Exception x = new Exception();
   				errors.add(x);
   			}
@@ -172,6 +200,63 @@ public class LabelMaker {
   			this.totemPole = totemPole;
   	}
   	
+  	/** Accessors for testing purposes. */
+  	public int getAisleStart() {
+  		return aisleStart;
+  	}
+  	
+  	public int getAisleEnd() {
+  		return aisleEnd;
+  	}
+  	
+  	public int getSectionStart() {
+  		return sectionStart;
+  	}
+  	
+  	public int getSectionEnd() {
+  		return sectionEnd;
+  	}
+  	
+  	public char getLevelStart() {
+  		return levelStart;
+  	}
+  	
+  	public char getLevelEnd() {
+  		return levelEnd;
+  	}
+  	
+  	public int getPositionStart() {
+  		return positionStart;
+  	}
+  	
+  	public int getPositionEnd() {
+  		return positionEnd;
+  	}
+  	
+  	public boolean getAisle2() {
+  		return aisle2;
+  	}
+  	
+  	public boolean getAisle4() {
+  		return aisle4;
+  	}
+  	
+  	public boolean getSection2() {
+  		return section2;
+  	}
+  	
+  	public boolean getSection4() {
+  		return section4;
+  	}
+  	
+  	public boolean getTotemPole() {
+  		return totemPole;
+  	}
+  	
+  	public Queue<Exception> getErrors() {
+  		return errors;
+  	}
+  	
   	/** Creates error message pop up with instructions. */
   	public void errorMsg() {
   		
@@ -189,7 +274,7 @@ public class LabelMaker {
                 JOptionPane.ERROR_MESSAGE);
   	}
   	
-  	/** Writes labels.txt file. Writes to desktop. */
+  	/** Writes labels.txt file to desktop. */
 	public void main() {
 		
 		String desktop = System.getProperty("user.home") + "\\Desktop";
@@ -203,6 +288,7 @@ public class LabelMaker {
         			for (int level = levelStart; level < levelEnd + 1; level++) {
         				for (int position = positionStart; position < positionEnd + 1; position++) 
         				{
+        					// Always writes with 2 digits. For example: 1 = 01, 9 = 09
         					String s1 = Integer.toString(aisle / 10) 
         							+ Integer.toString(aisle % 10);
         					
@@ -251,9 +337,68 @@ public class LabelMaker {
 	                JOptionPane.ERROR_MESSAGE);
 		}
         // Prints Success! message and exits if file was written successfully.
-        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your "
-        		+ "desktop", "Success!",
+        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your"
+        		+ " desktop", "Success!",
                 JOptionPane.PLAIN_MESSAGE);
         System.exit(0);
+	}
+	
+	/* For testing purposes. Identical function except location of output file and error/success 
+	 * message. **/
+	public void main(File file) {
+        
+        try
+        (PrintWriter output = new PrintWriter(file);
+        		) {
+        	for (int aisle = aisleStart; aisle < aisleEnd + 1; aisle++) {
+        		for (int section = sectionStart; section < sectionEnd + 1; section++) {
+        			for (int level = levelStart; level < levelEnd + 1; level++) {
+        				for (int position = positionStart; position < positionEnd + 1; position++) 
+        				{
+        					// Always writes with 2 digits. For example: 1 = 01, 9 = 09
+        					String s1 = Integer.toString(aisle / 10) 
+        							+ Integer.toString(aisle % 10);
+        					
+                            String s2 = Integer.toString(section / 10) 
+                            		+ Integer.toString(section % 10);
+                            
+                            String s3 = "" + (char)level;
+                            
+                            String s4 = Integer.toString(position);
+                            
+                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4);
+                            
+                            /* Prints labels horizontally rather than vertically if Totem Poles
+                             is selected. */
+                            if (totemPole) {
+                            	output.print("\t");
+                            } else {
+                            	output.println();
+                            }
+        				}
+        			}
+        			
+        			// Increments section by 2 or 4 if user specifies.
+                    if (section2) {
+                    	section++;
+                    } else if (section4) {
+                    	section +=3;
+                    }
+                    
+                    // Totem Pole option breaks horizontal print at section change.
+                    if (totemPole) {
+                    	output.println();
+                    }
+        		}
+        		
+        		// Increments aisle by 2 or 4 if user specifies.
+                if (aisle2) {
+                	aisle++;
+                } else if (aisle4) {
+                	aisle += 3;
+                }
+        	}
+        	// Prints error message if FileNotFoundException. Not sure how to handle otherwise.
+		} catch (FileNotFoundException e) {}
 	}
 }
