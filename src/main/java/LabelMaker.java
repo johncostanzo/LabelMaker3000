@@ -54,6 +54,33 @@ public class LabelMaker {
 		}
 	}
 	
+	public LabelMaker(String aisleStart, String aisleEnd, String sectionStart, String sectionEnd, 
+			String levelStart, String levelEnd, String positionStart, String positionEnd, 
+			boolean aisle2, boolean aisle4, boolean section2, boolean section4, boolean totemPole, 
+			File file) 
+	{
+		setAisleStart(aisleStart);
+		setAisleEnd(aisleEnd);
+		setSectionStart(sectionStart);
+		setSectionEnd(sectionEnd);
+		setLevelStart(levelStart);
+		setLevelEnd(levelEnd);
+		setPositionStart(positionStart);
+		setPositionEnd(positionEnd);
+		setAisle2(aisle2);
+		setAisle4(aisle4);
+		setSection2(section2);
+		setSection4(section4);
+		setTotemPole(totemPole);
+		
+		// If there was invalid input
+		if (!errors.isEmpty()) {
+			errorMsg();
+		} else {
+			main(file);
+		}
+	}
+	
 	/** Mutator functions. Input validation where needed. If invalid input, added Exception to 
 	 * errors queue. */
   	public void setAisleStart(String aisleStart) {
@@ -203,6 +230,7 @@ public class LabelMaker {
         			for (int level = levelStart; level < levelEnd + 1; level++) {
         				for (int position = positionStart; position < positionEnd + 1; position++) 
         				{
+        					// Always writes with 2 digits. For example: 1 = 01, 9 = 09
         					String s1 = Integer.toString(aisle / 10) 
         							+ Integer.toString(aisle % 10);
         					
@@ -251,8 +279,74 @@ public class LabelMaker {
 	                JOptionPane.ERROR_MESSAGE);
 		}
         // Prints Success! message and exits if file was written successfully.
-        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your "
-        		+ "desktop", "Success!",
+        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your"
+        		+ " desktop", "Success!",
+                JOptionPane.PLAIN_MESSAGE);
+        System.exit(0);
+	}
+	
+	/* For testing purposes. Changed file path and name. **/
+	public void main(File file) {
+        
+        try
+        (PrintWriter output = new PrintWriter(file);
+        		) {
+        	for (int aisle = aisleStart; aisle < aisleEnd + 1; aisle++) {
+        		for (int section = sectionStart; section < sectionEnd + 1; section++) {
+        			for (int level = levelStart; level < levelEnd + 1; level++) {
+        				for (int position = positionStart; position < positionEnd + 1; position++) 
+        				{
+        					// Always writes with 2 digits. For example: 1 = 01, 9 = 09
+        					String s1 = Integer.toString(aisle / 10) 
+        							+ Integer.toString(aisle % 10);
+        					
+                            String s2 = Integer.toString(section / 10) 
+                            		+ Integer.toString(section % 10);
+                            
+                            String s3 = "" + (char)level;
+                            
+                            String s4 = Integer.toString(position);
+                            
+                            output.print(s1 + "-" + s2 + "-" + s3 + "-" + s4);
+                            
+                            /* Prints labels horizontally rather than vertically if Totem Poles
+                             is selected. */
+                            if (totemPole) {
+                            	output.print("\t");
+                            } else {
+                            	output.println();
+                            }
+        				}
+        			}
+        			
+        			// Increments section by 2 or 4 if user specifies.
+                    if (section2) {
+                    	section++;
+                    } else if (section4) {
+                    	section +=3;
+                    }
+                    
+                    // Totem Pole option breaks horizontal print at section change.
+                    if (totemPole) {
+                    	output.println();
+                    }
+        		}
+        		
+        		// Increments aisle by 2 or 4 if user specifies.
+                if (aisle2) {
+                	aisle++;
+                } else if (aisle4) {
+                	aisle += 3;
+                }
+        	}
+        	// Prints error message if FileNotFoundException. Not sure how to handle otherwise.
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, e.toString(), "Error",
+	                JOptionPane.ERROR_MESSAGE);
+		}
+        // Prints Success! message and exits if file was written successfully.
+        JOptionPane.showMessageDialog(null, "Text file \"labels\" was successfully created on your"
+        		+ " desktop", "Success!",
                 JOptionPane.PLAIN_MESSAGE);
         System.exit(0);
 	}
